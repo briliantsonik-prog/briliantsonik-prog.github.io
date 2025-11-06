@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>FOOTBALL IQ TRAINING | Индивидуальные тренировки</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Индивидуальные футбольные тренировки: вратари и мышление поля. Прокачай реакцию, чтение игры и уверенность." />
+
+  <!-- Шрифт -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-dark: #02040a;
+      --accent: #00ff88;
+      --accent-soft: rgba(0, 255, 136, 0.4);
+      --text-main: #f5f5f5;
+      --text-muted: #9da4b5;
+      --card-bg: rgba(5, 10, 25, 0.85);
+      --border-soft: rgba(255, 255, 255, 0.08);
+      --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.8);
+      --transition-fast: 0.4s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* 4K ФОН */
+    .background-4k {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(0, 255, 136, 0.20) 0, transparent 55%),
+        radial-gradient(circle at 90% 80%, rgba(0, 132, 255, 0.25) 0, transparent 55%),
+        url("https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg?auto=compress&cs=tinysrgb&w=2560");
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.2) contrast(1.05) brightness(0.9);
+    }
+
+    .bg-blur-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      backdrop-filter: blur(14px);
+      background: radial-gradient(circle at top, rgba(0, 0, 0, 0.5), rgba(2, 4, 10, 0.98));
+    }
+
+    /* NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(2, 4, 10, 0.98), rgba(2, 4, 10, 0.85), transparent);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      font-size: 14px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 16px rgba(0, 255, 136, 0.9);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      font-size: 13px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 500;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-soft);
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 11px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.25);
+      transition: var(--transition-fast);
+    }
+
+    .nav-cta span {
+      font-size: 16px;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent);
+      color: #02040a;
+      box-shadow: 0 0 40px rgba(0, 255, 136, 0.4);
+      transform: translateY(-1px);
+    }
+
+    /* ЛЕЙАУТ */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    section {
+      margin: 80px 0;
+      position: relative;
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.6fr);
+      gap: 40px;
+      align-items: center;
+      min-height: calc(100vh - 80px);
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 3.4vw, 46px);
+      line-height: 1.08;
+      font-weight: 900;
+      text-transform: uppercase;
+      text-wrap: balance;
+      margin-bottom: 24px;
+    }
+
+    .hero-gradient-text {
+      background: linear-gradient(120deg, #ffffff, #c8ffe2, #00ff88);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 26px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+
+    .badge {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      backdrop-filter: blur(12px);
+      background: rgba(2, 4, 10, 0.8);
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      padding: 13px 24px;
+      border-radius: 999px;
+      border: none;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      cursor: pointer;
+      background: linear-gradient(135deg, #00ff88, #00c06f);
+      color: #02040a;
+      box-shadow: 0 18px 40px rgba(0, 255, 136, 0.45);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 22px 60px rgba(0, 255, 136, 0.6);
+    }
+
+    .btn-secondary {
+      padding: 11px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: rgba(2, 4, 10, 0.8);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition-fast);
+    }
+
+    .btn-secondary:hover {
+      color: var(--text-main);
+      border-color: var(--accent-soft);
+      background: rgba(3, 6, 18, 0.95);
+    }
+
+    .hero-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    .hero-note span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* HERO CARD */
+    .hero-card {
+      position: relative;
+      padding: 22px;
+      border-radius: 26px;
+      background: radial-gradient(circle at top, rgba(0, 255, 136, 0.08), rgba(3, 6, 18, 0.96));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .hero-card-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .field-grid {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 255, 136, 0.4);
+      background: radial-gradient(circle at 15% 0%, rgba(0,255,136,0.25), transparent 55%), #02060e;
+      padding: 14px;
+      aspect-ratio: 4 / 3;
+      display: grid;
+      grid-template-rows: repeat(6, 1fr);
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+    }
+
+    .field-cell {
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .field-cell::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(0, 255, 136, 0.18), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .field-cell.hot::after {
+      opacity: 1;
+    }
+
+    .field-label {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #02040a;
+      background: var(--accent);
+    }
+
+    .gk-dot {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 22px rgba(0, 255, 136, 0.85);
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .gk-dot span {
+      color: #02040a;
+    }
+
+    .line-pass {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.9), transparent);
+      opacity: 0.4;
+      transform-origin: left center;
+    }
+
+    .hero-card-caption {
+      margin-top: 18px;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .hero-card-caption span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* СЕКЦИЯ: ВРАТАРИ / ПОЛЕ */
+    .section-header {
+      max-width: 640px;
+      margin-bottom: 30px;
+    }
+
+    .section-header h2 {
+      font-size: 22px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 10px;
+    }
+
+    .section-header p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .training-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .card {
+      border-radius: 22px;
+      border: 1px solid var(--border-soft);
+      background: var(--card-bg);
+      box-shadow: var(--shadow-soft);
+      padding: 20px 20px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background: radial-gradient(circle at top, rgba(0, 255, 136, 0.14), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card h3 {
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .chip {
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(3, 6, 18, 0.95);
+      color: var(--text-muted);
+    }
+
+    .card-footnote {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .highlight-number {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .highlight-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 6px;
+    }
+
+    .price-tag {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .price-tag span {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin-left: 6px;
+    }
+
+    /* ПАКЕТЫ */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .pricing-card {
+      border-radius: 22px;
+      border: 1px solid var(--border-soft);
+      background: rgba(3, 6, 18, 0.96);
+      box-shadow: var(--shadow-soft);
+      padding: 20px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-card.popular {
+      border-color: var(--accent-soft);
+      box-shadow: 0 26px 70px rgba(0, 255, 136, 0.32);
+    }
+
+    .pricing-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .pricing-title {
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 10px;
+    }
+
+    .pricing-price {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .pricing-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .pricing-list {
+      list-style: none;
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .pricing-list li::before {
+      content: "• ";
+      color: var(--accent);
+      margin-right: 4px;
+    }
+
+    .pricing-btn {
+      align-self: flex-start;
+      margin-top: auto;
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: transparent;
+      color: var(--text-main);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .pricing-card.popular .pricing-btn {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .pricing-btn:hover {
+      background: rgba(0, 255, 136, 0.18);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ОТЗЫВЫ */
+    .testimonials {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 26px;
+    }
+
+    .quote-card {
+      border-radius: 22px;
+      border: 1px solid var(--border-soft);
+      background: var(--card-bg);
+      padding: 18px 18px 20px;
+      box-shadow: var(--shadow-soft);
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(0, 255, 136, 0.2), transparent 60%);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .quote-mark {
+      font-size: 36px;
+      line-height: 1;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .quote-author {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .quote-role {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* КОНТАКТЫ */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 26px;
+      align-items: flex-start;
+    }
+
+    .contact-card {
+      border-radius: 22px;
+      border: 1px solid var(--border-soft);
+      background: var(--card-bg);
+      padding: 20px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .contact-row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    .contact-row a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-row a:hover {
+      text-decoration: underline;
+    }
+
+    .small-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .social-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .social-chip {
+      font-size: 11px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      color: var(--text-muted);
+      text-decoration: none;
+      background: rgba(3, 6, 18, 0.95);
+      transition: var(--transition-fast);
+    }
+
+    .social-chip:hover {
+      border-color: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    /* FOOTER */
+    footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 20px 24px;
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    /* АНИМАЦИИ ПРИ СКРОЛЛЕ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* АДАПТИВ */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        min-height: auto;
+      }
+      .hero-card {
+        order: -1;
+      }
+
+      .training-grid,
+      .testimonials,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .pricing-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      header {
+        background: rgba(2, 4, 10, 0.98);
+      }
+    }
+
+    @media (max-width: 600px) {
+      main {
+        padding-inline: 16px;
+      }
+
+      section {
+        margin: 60px 0;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background-4k"></div>
+  <div class="bg-blur-overlay"></div>
+
+  <!-- NAVBAR -->
+  <header>
+    <nav class="nav">
+      <div class="logo">
+        <span class="logo-dot"></span>
+        <span>FOOTBALL IQ LAB</span>
+      </div>
+      <div class="nav-links">
+        <a href="#gk">Вратари</a>
+        <a href="#field">Мышление поля</a>
+        <a href="#pricing">Пакеты</a>
+        <a href="#contact">Контакт</a>
+      </div>
+      <a href="#contact" class="nav-cta">
+        БРОНИРОВАТЬ
+        <span>→</span>
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="reveal">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span> Индивидуальные тренировки 1-на-1
+        </div>
+        <h1>
+          Сделай свой <span class="hero-gradient-text">футбольный IQ</span> и реакцию  
+          опасными для любого соперника.
+        </h1>
+        <p>
+          Индивы для вратарей и полевых игроков: техника, мышление, игра под
+          давлением. Без пустой теории — только практические сценарии, как в реальном матче.
+        </p>
+
+        <div class="hero-badges">
+          <div class="badge">⚽ Вратарские тренировки</div>
+          <div class="badge">🧠 Мышление поля</div>
+          <div class="badge">🎯 Аналитика моментов</div>
+        </div>
+
+        <div class="hero-cta-row">
+          <button class="btn-primary" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
+            Забронировать тренировку <span>→</span>
+          </button>
+          <button class="btn-secondary" onclick="document.querySelector('#pricing').scrollIntoView({behavior:'smooth'})">
+            Смотреть пакеты
+          </button>
+        </div>
+
+        <div class="hero-note">
+          <span>Лимит мест</span>: работаю только с игроками, кто реально хочет расти, а не “просто попинать мяч”.
+        </div>
+      </div>
+
+      <!-- HERO CARD / ПОЛЕ -->
+      <div class="hero-card reveal">
+        <div class="hero-card-tag">Live-анализ позиции вратаря и поля</div>
+        <div class="field-grid">
+          <!-- несколько “горячих зон” -->
+          <div class="field-cell hot"></div>
+          <div class="field-cell"></div>
+          <div class="field-cell"></div>
+          <div class="field-cell"></div>
+
+          <div class="field-cell"></div>
+          <div class="field-cell"></div>
+          <div class="field-cell hot"></div>
+          <div class="field-cell"></div>
+
+          <div class="field-cell"></div>
+          <div class="field-cell"></div>
+          <div class="field-cell"></div>
+          <div class="field-cell"></div>
+
+          <div class="field-cell"></div>
+          <div class="field-cell hot"></div>
+          <div class="field-cell"></div>
+          <div class="field-cell"></div>
+
+          <div class="field-cell"></div>
+          <div class="field-cell"></div>
+          <div class="field-cell"></div>
+          <div class="field-cell hot"></div>
+
+          <div class="field-cell"></div>
+          <div class="field-cell"></div>
+          <div class="field-cell"></div>
+          <div class="field-cell">
+            <div class="field-label">Горячие зоны</div>
+          </div>
+
+          <!-- GK DOT -->
+          <div class="gk-dot" style="left: 8%; top: 68%;">
+            <span>GK</span>
+          </div>
+
+          <!-- ПЕРЕДАЧА ЛИНИЯ -->
+          <div class="line-pass" style="left: 10%; top: 70%; width: 55%; transform: rotate(-6deg);"></div>
+          <div class="line-pass" style="left: 60%; top: 38%; width: 26%; transform: rotate(-18deg);"></div>
+        </div>
+        <div class="hero-card-caption">
+          На каждой тренировке разбираем <span>позицию</span>, <span>решения</span> и
+          <span>реакцию</span> — как будто это последний матч сезона.  
+          Ты не просто бегаешь, ты учишься читать игру.
+        </div>
+      </div>
+    </section>
+
+    <!-- ВРАТАРИ / ПОЛЕ -->
+    <section id="gk">
+      <div class="section-header reveal">
+        <h2>Вратари и мышление поля</h2>
+        <p>
+          Вратарь — это не просто человек в перчатках. Это первый плеймейкер и
+          последний щит. Полевой — это камера с обзором 360°. Мы качаем и
+          тело, и мозг: реакция, угол атаки, позиционирование, скорость решений.
+        </p>
+      </div>
+
+      <div class="training-grid">
+        <div class="card reveal">
+          <h3>Вратарские тренировки</h3>
+          <p>
+            Работаем над взрывной реакцией, таймингом выхода, блоками 1-в-1,
+            игрой ногами и психикой после пропущенных голов.
+          </p>
+          <div class="chip-row">
+            <div class="chip">реакция 0.5 сек</div>
+            <div class="chip">1-в-1 / выходы</div>
+            <div class="chip">игра ногами</div>
+            <div class="chip">работа под давлением</div>
+          </div>
+          <p>
+            Для каждого вратаря составляется сценарий, который максимально
+            похож на реальные эпизоды матчей, а не на “красивую треню для видео”.
+          </p>
+          <div class="card-footnote">
+            Подходит вратарям 13+ лет, от любительского до полупро-уровня.
+          </div>
+        </div>
+
+        <div class="card reveal" id="field">
+          <h3>Мышление поля / Football IQ</h3>
+          <p>
+            Разбираем, куда смотреть, прежде чем ты получишь мяч.  
+            Сканы поля, первые касания, выбор решений, игра без мяча.
+          </p>
+          <div class="chip-row">
+            <div class="chip">сканинг поля</div>
+            <div class="chip">линии паса</div>
+            <div class="chip">позиции между линиями</div>
+          </div>
+          <p>
+            Во время тренировок используем мини-анализ: ты видишь себя со
+            стороны и понимаешь, почему момент “сломался” или “сработал”.
+          </p>
+          <div class="card-footnote">
+            Идеально для ЦП, ЦАП, опорников и защитников, которые хотят играть головой, а не только ногами.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ПАКЕТЫ -->
+    <section id="pricing">
+      <div class="section-header reveal">
+        <h2>Пакеты тренировок</h2>
+        <p>
+          Цены примерные — ты можешь адаптировать под свой город/уровень.
+          Главное: показываем структуру, а не “разовый хаос”.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pricing-card reveal">
+          <div>
+            <div class="pricing-label">Старт</div>
+            <div class="pricing-title">Разовая сессия</div>
+            <div class="pricing-price">$60</div>
+            <div class="pricing-note">
+              Чтобы протестировать формат и понять, как заходит тренировка.
+            </div>
+            <ul class="pricing-list">
+              <li>1 x 60 минут индивидуально</li>
+              <li>Разбор слабых зон</li>
+              <li>Мини-видеоаналитика после тренировки</li>
+            </ul>
+          </div>
+          <button class="pricing-btn" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
+            выбрать
+          </button>
+        </div>
+
+        <div class="pricing-card popular reveal">
+          <div>
+            <div class="pricing-label">Рекоммендуемый</div>
+            <div class="pricing-title">4 недели прогресса</div>
+            <div class="pricing-price">$220</div>
+            <div class="pricing-note">
+              Системная работа: тело + мышление + аналитика.
+            </div>
+            <ul class="pricing-list">
+              <li>4 x 60 минут (1 раз в неделю)</li>
+              <li>Чек-лист прогресса по неделям</li>
+              <li>Видеоразбор ключевых эпизодов</li>
+              <li>Домашние задания с мячом</li>
+            </ul>
+          </div>
+          <button class="pricing-btn" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
+            забронировать пакет
+          </button>
+        </div>
+
+        <div class="pricing-card reveal">
+          <div>
+            <div class="pricing-label">Максимум</div>
+            <div class="pricing-title">PRO режим</div>
+            <div class="pricing-price">$480</div>
+            <div class="pricing-note">
+              Для тех, кто хочет прыгнуть на другой уровень за короткий срок.
+            </div>
+            <ul class="pricing-list">
+              <li>8 x 60 минут (2 раза в неделю)</li>
+              <li>Полный видеоанализ игры</li>
+              <li>Онлайн-поддержка между тренировками</li>
+              <li>Отдельный план по физике и восстановлению</li>
+            </ul>
+          </div>
+          <button class="pricing-btn" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
+            начать PRO
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ОТЗЫВЫ -->
+    <section>
+      <div class="section-header reveal">
+        <h2>Что говорят игроки</h2>
+        <p>
+          Тут можешь вставить реальные отзывы своих игроков / родителей. Сейчас
+          — примерный текст, чтобы сайт был живым с первого дня.
+        </p>
+      </div>
+
+      <div class="testimonials">
+        <div class="quote-card reveal">
+          <div class="quote-mark">“</div>
+          <p>
+            После месяца тренеровки у меня вратарская игра вообще другая.  
+            Раньше просто прыгал на мяч. Сейчас понимаю, где стоять и что читать до удара.  
+            И самое главное — пропущенный гол уже не убивает мозг.
+          </p>
+          <div class="quote-author">Артём, 17 лет</div>
+          <div class="quote-role">Вратарь, любительская лига</div>
+        </div>
+
+        <div class="quote-card reveal">
+          <div class="quote-mark">“</div>
+          <p>
+            Мой сын перестал прятаться от мяча. После тренировок он лучше читает
+            моменты и не боится играть вперёд.  
+            Это не просто треня — это работа с уверенностью.
+          </p>
+          <div class="quote-author">Родитель</div>
+          <div class="quote-role">Оценка индивидуальных тренеровок</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- КОНТАКТЫ -->
+    <section id="contact">
+      <div class="section-header reveal">
+        <h2>Записаться на тренировку</h2>
+        <p>
+          Напиши мне пару слов: кто ты (позиция, возраст), где играешь и чего
+          хочешь добиться. Дальше согласуем время и формат.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card reveal">
+          <div class="small-label">Прямой контакт</div>
+          <div class="contact-row">
+            <!-- ЗАМЕНИ ЭТИ ССЫЛКИ НА СВОИ -->
+            <div>
+              WhatsApp: <a href="https://wa.me/1234567890" target="_blank">написать в WhatsApp</a>
+            </div>
+            <div>
+              Telegram: <a href="https://t.me/yourusername" target="_blank">@yourusername</a>
+            </div>
+            <div>
+              Email: <a href="mailto:youremail@example.com">youremail@example.com</a>
+            </div>
+          </div>
+
+          <div style="margin-top: 18px;">
+            <div class="small-label">Соцсети / Контент</div>
+            <div class="social-chips">
+              <!-- тоже замени -->
+              <a href="#" class="social-chip">YouTube канал</a>
+              <a href="#" class="social-chip">Instagram Reels</a>
+              <a href="#" class="social-chip">TikTok</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-card reveal">
+          <div class="small-label">Мини-форма (можно подключить позже)</div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 10px;">
+            Здесь ты можешь подключить реальную форму (Tally Forms, Typeform, Google Form).
+            Сейчас — демо-текст:
+          </p>
+          <ul class="pricing-list" style="margin-bottom: 6px;">
+            <li>Имя и возраст</li>
+            <li>Позиция (GK / защитник / ЦП / нападающий)</li>
+            <li>Где играешь (клуб/лига)</li>
+            <li>Цель на ближайшие 3–6 месяцев</li>
+          </ul>
+          <p style="font-size: 12px; color: var(--text-muted);">
+            Когда будешь готов, просто замени этот блок на iframe с формой.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>© FOOTBALL IQ LAB — индивидуальные тренировки вратарей и полевых.</div>
+    <div>Сделано ради тех, кто реально хочет прогресса, а не оправданий.</div>
+  </footer>
+
+  <!-- JS: анимации при скролле -->
+  <script>
+    const revealBlocks = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.18
+      }
+    );
+
+    revealBlocks.forEach(block => observer.observe(block));
+  </script>
+</body>
+</html>
